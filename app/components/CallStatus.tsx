@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react';
+import FormResponse from './FormResponse';
 
 interface CallStatusProps {
   status: string;
@@ -11,11 +12,8 @@ const CallStatus: React.FC<CallStatusProps> = ({ status, children }) => {
       <div className="mt-2">
         <h2 className="text-xl font-semibold mb-2">Call Status</h2>
         <p className="text-lg font-mono text-gray-400">Status: <span className="text-white text-base">{status}</span></p>
-        {/* TODO <p className="font-mono text-gray-400">Latency: <span className="text-gray-500">N/A</span></p> */}
-        {/* TODO <p className="font-mono">00:00</p> */}
       </div>
-
-      {/* Optional Children */}
+      <FormResponse />
       {children}
     </div>
   );

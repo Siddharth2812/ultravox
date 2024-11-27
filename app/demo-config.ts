@@ -3,8 +3,8 @@ import { DemoConfig, ParameterLocation, SelectedTool } from "@/lib/types";
 const selectedTools: SelectedTool[] = [
   {
     "temporaryTool": {
-      "modelToolName": "formResponse",
-      "description": "Use this tool to ask questions and collect information from the user. Must be used for ALL question-asking interactions.",
+      "modelToolName": "FormResponse",
+      "description": "Display a form to collect user responses. Used for gathering financial information in a structured way.",
       "dynamicParameters": [
         {
           "name": "formData",
@@ -12,23 +12,36 @@ const selectedTools: SelectedTool[] = [
           "schema": {
             "type": "object",
             "properties": {
-              "title": { "type": "string", "description": "The title of the form" },
-              "description": { "type": "string", "description": "Optional description of the form" },
+              "id": { "type": "string", "description": "Unique identifier for the form" },
               "questions": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "question": { "type": "string" },
-                    "type": { "type": "string", "enum": ["text", "select", "multiselect", "number"] },
-                    "options": { "type": "array", "items": { "type": "string" } },
-                    "required": { "type": "boolean" }
+                    "id": { "type": "string", "description": "Question identifier" },
+                    "type": { 
+                      "type": "string", 
+                      "enum": ["text", "number", "select", "radio"],
+                      "description": "Type of input field"
+                    },
+                    "label": { "type": "string", "description": "Question text" },
+                    "options": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "description": "Options for select/radio inputs"
+                    },
+                    "required": { "type": "boolean", "description": "Whether the question is required" }
                   },
-                  "required": ["question", "type"]
+                  "required": ["id", "type", "label"]
                 }
+              },
+              "category": { 
+                "type": "string", 
+                "description": "Category of information being collected",
+                "enum": ["personal", "financial", "savings", "risk", "insurance"]
               }
             },
-            "required": ["title", "questions"]
+            "required": ["id", "questions", "category"]
           },
           "required": true
         }
@@ -121,7 +134,7 @@ const sysPrompt = `
 - Provide simple, clear financial advice
 
 ## Tool Usage Rules
-- MUST use FormResponse for ALL questions
+- IMPORTANT : MUST use FormResponse for ALL questions
 - Ask maximum 2 questions per message
 - Forms can contain up to 3 questions
 - Questions must be asked in sequential order

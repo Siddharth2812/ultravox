@@ -12,7 +12,7 @@ import CallStatus from '@/components/CallStatus';
 import DebugMessages from '@/components/DebugMessages';
 import MicToggleButton from '@/components/MicToggleButton';
 import { PhoneOffIcon } from 'lucide-react';
-import OrderDetails from '@/components/OrderDetails';
+import FinancialForm from '@/components/FinancialForm';
 
 type SearchParamsProps = {
   showMuteSpeakerButton: boolean;
@@ -216,12 +216,13 @@ export default function Home() {
                 </div>
                 {/* Call Status */}
                 <CallStatus status={agentStatus}>
-                  <OrderDetails />
+                  {/* <OrderDetails /> */}
                 </CallStatus>
               </div>
             </div>
             {/* Debug View */}
             <DebugMessages debugMessages={callDebugMessages} />
+            <FinancialForm />
           </div>
         )}
       </SearchParamsHandler>
