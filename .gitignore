@@ -1,0 +1,58 @@
+# Dependencies
+node_modules
+.pnpm-store
+.pnp.*
+.pnpm-debug.log*
+
+# Build outputs
+dist
+build
+*.tsbuildinfo
+.next/
+out/
+build/
+.vercel
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage
+.nyc_output
+
+# Temporary files
+.tmp
+.temp
+
+# Next.js
+.next
+next-env.d.ts
+.vercel
+public/sw.js
+public/workbox-*.js
+.contentlayer
+
+# React / Web
+*.pem
+.cache
+storybook-static
+.eslintcache
